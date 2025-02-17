@@ -1,9 +1,8 @@
-const fs = require('fs');
-
+const { getAllBooks } = require('../services/books');
 
 function getBooks(req, res) {
     try {
-        const books = JSON.parse(fs.readFileSync('books.json', 'utf8'));
+        const books = getAllBooks();
         res.send(books);
 
     } catch (e) {
