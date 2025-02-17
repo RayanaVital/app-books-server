@@ -1,15 +1,9 @@
 const { Router } = require('express');
+const {getBooks} = require('../controllers/books');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  try {
-    res.send('Hello World!');
-
-  } catch (e) {
-    res.status(500).send(e.message);
-  }
-});
+router.get('/', getBooks);
 
 router.post('/', (req, res) => {  
   res.send('Got a POST request');
