@@ -16,8 +16,25 @@ function insertBook(newBook) {
     fs.writeFileSync('books.json', JSON.stringify(newBooksList));
 }
 
+function editBook(editData, id) {
+    const books = JSON.parse(fs.readFileSync('books.json'));
+    const updatedBooks = books.map(book =>
+        book.id === id ? { ...book, ...editData } : book
+    );
+    fs.writeFileSync('books.json', JSON.stringify(updatedBooks));
+}
+
+function deleteBookById(id) {
+    const books = JSON.parse(fs.readFileSync('books.json'));
+    const updatedBooks = books.filter(book => book.id !== id);
+    fs.writeFileSync('books.json', JSON.stringify(updatedBooks));
+}
+
+
 module.exports = {
     getAllBooks,
     getBookById,
-    insertBook
+    insertBook,
+    editBook,
+    deleteBookById
 };

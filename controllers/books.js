@@ -1,4 +1,4 @@
-const { getAllBooks, getBookById, insertBook } = require('../services/books');
+const { getAllBooks, getBookById, insertBook, editBook, deleteBookById } = require('../services/books');
 
 function getBooks(req, res) {
     try {
@@ -31,9 +31,32 @@ function postBook(req, res){
     }
 } 
 
+function patchBook(req, res){
+    try {
+        const editData = req.body;
+        const id = req.params.id;
+        editBook(editData, Number(id));
+        res.status(200).send('Book updated');
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+}
+
+function deleteBook(req, res){
+    try {
+        const id = req.params.id;
+        deleteBookById(Number (id));
+        res.status(200).send('Book deleted');
+    } catch (e) {
+        res.status(500).send(e.message);
+    }
+}
+
 
 module.exports = {
     getBooks,
     getBook,
-    postBook
+    postBook,
+    patchBook,
+    deleteBook
 }
