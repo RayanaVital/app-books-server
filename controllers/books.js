@@ -29,6 +29,10 @@ function getBook(req, res) {
 function postBook(req, res){
     try {
         const newBook = req.body;
+        if(!req.body.title){
+            res.status(422).send('Title is required');
+            return;
+        }
         insertBook(newBook);
         res.status(201).send('Book inserted');
     } catch (e) {
@@ -61,7 +65,7 @@ function deleteBook(req, res){
             res.status(422).send('Invalid ID');
             return;
         }
-        
+
         deleteBookById(Number (id));
         res.status(200).send('Book deleted');
     } catch (e) {
