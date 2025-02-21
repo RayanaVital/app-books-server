@@ -13,6 +13,11 @@ function getBooks(req, res) {
 function getBook(req, res) {
     try {
         const id = req.params.id;
+        if(isNaN(id)){
+            res.status(422).send('Invalid ID');
+            return;
+        }
+
         const book = getBookById(id);
         res.send(book);
 
@@ -35,6 +40,12 @@ function patchBook(req, res){
     try {
         const editData = req.body;
         const id = req.params.id;
+
+        if(isNaN(id)){
+            res.status(422).send('Invalid ID');
+            return;
+        }
+
         editBook(editData, Number(id));
         res.status(200).send('Book updated');
     } catch (e) {
@@ -45,6 +56,12 @@ function patchBook(req, res){
 function deleteBook(req, res){
     try {
         const id = req.params.id;
+
+        if(isNaN(id)){
+            res.status(422).send('Invalid ID');
+            return;
+        }
+        
         deleteBookById(Number (id));
         res.status(200).send('Book deleted');
     } catch (e) {
