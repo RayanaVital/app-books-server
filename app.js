@@ -3,15 +3,15 @@ const app = express();
 const cors = require('cors');
 
 
+app.use(cors({
+  origin: '*', 
+}));
+
 app.use(express.json());
 
 
 const books = require('./routes/books');
-
 app.use('/books', books);
-app.use(cors({
-  origin: '*', 
-}))
 
 
 const port = 8000;
